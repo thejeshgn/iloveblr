@@ -1,0 +1,91 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8" /> 
+	<title>I Love Bangalore</title> 
+<link type="text/css" href="http://media.thejeshgn.com/script/jquery-ui-1.8.18/css/custom-theme/jquery-ui-1.8.18.custom.css" rel="stylesheet" /> 
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script> 
+	<script type="text/javascript" src="bangalore_temparature.js"></script> 
+	<link href='http://fonts.googleapis.com/css?family=Reenie+Beanie' rel='stylesheet' type='text/css'>
+	<style type="text/css"> 
+		#demo-frame > div.demo { padding: 20px !important; }
+		h1 { font-family: 'Reenie Beanie', arial, serif; 
+		font-size: 83px;
+		text-align:center;
+		}
+		h2 { font-family: 'Reenie Beanie', arial, serif; 
+		font-size: 30px;
+		text-align:right;
+		}
+	</style> 
+	<script type="text/javascript"> 
+	var months = new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec");
+	var colors = new Array("#DEEBF7","#C6DBEF","#9ECAE1","#A1D99B","#74C476","#41AB5D","#41AB5D","#FEE0D2","#FCBBA1","FC9272","FB6A4A");
+	$(function() {
+		$("#slider").slider();
+	});
+	
+	function start(){
+		$( "#slider" ).slider( "option", "min", 1 );
+		$( "#slider" ).slider( "option", "max", 1224 );	
+		
+		$( "#slider" ).slider({
+			slide: function(event, ui) { 
+				
+				month = ui.value%12;
+				year = Math.floor(ui.value/12)+1901;
+				year_index = Math.floor(ui.value/12);
+				if(month==0){
+					month=12;
+				        year = year-1;	
+					year_index = year_index-1;
+				}	
+				month_index = ""+month+"";
+				//$('#temp').html(ui.value+" month ="+month+"and year="+year+"temparature="+bangalore_temparature["results"][year_index][month_index]);
+				temp = Math.floor(bangalore_temparature["results"][year_index][month_index]);
+				temp = temp-20;
+				$('#message').html("because it was " +bangalore_temparature["results"][year_index][month_index] +" &deg;C on "+ months[month-1]+"/"+year+".");
+				$("body").css("background-color", colors[temp] );
+			}
+			});
+			
+	}
+	
+	</script> 
+</head> 
+<body onload="start();" >
+<div id="content" style="width:100%;">
+	<h1>I Love Bangalore</h1>
+<center>
+	<div class="demo">  
+		<div id="slider"></div> 
+	</div>  
+</center>
+	<div>
+		<h1 id="message" class="message"> Slide the slider to know.....</h1>
+	</div>
+ 
+	<div name="bottomBar" style="z-index: 2; position: absolute; left: 0px; bottom: 10px; width: 100%;"><span class="st_twitter_vcount" displayText="Tweet"></span><span class="st_facebook_vcount" displayText="Share"></span><span class="st_email_vcount" displayText="Email"></span><span class="st_sharethis_vcount" displayText="Share"></span>
+		<h2>With <font color="red">&hearts;</font>  <a href="http://thejeshgn.com">Thejesh GN</a> and <a href="http://thejeshgn.com/2010/08/12/i-love-blr-visualizing-bangalore-temperature/">more about this app and ur comments</a>.&nbsp;&nbsp;</h2>
+	</div>
+</div>	
+</body> 
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'a4a67f2c-cc15-489d-bb0c-0173bc71d84d'});</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-51179-6']);
+  _gaq.push(['_setDomainName', '.thejeshgn.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</html>
